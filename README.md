@@ -14,6 +14,9 @@ This code refers to the following publication.
 # Installation
 This installation has been tested on Windows 10 64 bit.
 
+## Hardware requirements
+This code was tested on a NVIDIA RTX 2070. The code will automatically assign one model for each available GPU.
+
 ## Python 3.7 
 Download Python 3.7 x64
 https://www.python.org/downloads/windows/
@@ -31,4 +34,12 @@ https://www.tensorflow.org/install/gpu
 A virtual environment is recommended. After setting up your virtual environment, run
 ```shell script
 python3 -m pip install -r requirements.txt
+```
+
+## Download synthetic image database
+TODO
+
+## Run program
+```shell script
+python3 main.py
 ```
