@@ -111,7 +111,7 @@ def train_greyscale_model(device, configuration, case_name, model_factory, model
                         full_history[key] += history.history[key]
 
                 # Show DEBUG output images or PRINT them
-                if configuration['DEBUG_OUTPUT_IMAGES'] or configuration['PRINT_OUTPUT_IMAGES']:
+                if configuration['PRINT_OUTPUT_IMAGES']:
 
                     # Depending on the number of STEPS_PER_EPOCH the generator can be accessed here before
                     # the fit_generator stops using it. So we try a few times in case an exception is raised
