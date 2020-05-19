@@ -8,7 +8,7 @@ A couple of useful links on this topic.
 - https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)
 
 # Citation
-This code refers to the following publication. 
+Cite the following publication.
 ```bibtex
 @Article{herediaperez2020effects,
   author       = {Heredia Perez, S. A. and Marinho, M. M. and Harada, K. and Mitsuishi, Mamoru},
@@ -44,9 +44,37 @@ python3 -m pip install -r requirements.txt
 ```
 
 ## Download synthetic image database
-TODO
+The data is available at IEEE DataPort
+http://dx.doi.org/10.21227/xmc2-1v59
 
-## Run program
+Download and extract `data.zip` and `validation_data.zip`
+
+### `data.zip`
+Contains 10376 synthetically generated images for each renderer and corresponding automatically-annotated ground-truths. 
+
+|Folder|Meaning|
+|---|---|
+|data/1_flat_renderer/image|Images rendered with the flat renderer|
+|data/1_flat_renderer/label|Flat renderer ground-truth|
+|data/2_basic_renderer/image|Images rendered with the basic renderer|
+|data/2_basic_renderer/label|Basic renderer ground-truth|
+|data/3_realistic_renderer/image|Images rendered with the realistic renderer|
+|data/3_realistic_renderer/label|Realistic renderer ground-truth|
+
+### `validation_data.zip`
+|Folder|Meaning|
+|---|---|
+|validation_data/image|Images obtained from the physical SmartArm setup|
+|validation_data/label|Manually-annotated ground-truth|
+
+
+## Run 
 ```shell script
 python3 main.py
 ```
+
+## Results
+Output images during training and trained models will be saved to the corresponding `output` folder of each renderer.
+
+## Configuration
+Most parameters relevant for training can be modified in the `configuration.yml` file. 
