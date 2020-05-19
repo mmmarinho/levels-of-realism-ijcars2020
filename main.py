@@ -68,7 +68,7 @@ augmentations = [
 ]
 
 
-class SubProcessTrainingManager:
+class TrainingManager:
     def __init__(self, device_name):
         self.device_name = device_name
         self.running = False
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     subprocess_training_manager_list = []
     for gpu in gpus:
         print('Registering GPU {}...'.format(gpu.name.replace('physical_', '')))
-        subprocess_training_manager_list.append(SubProcessTrainingManager(gpu.name.replace('physical_', '')))
+        subprocess_training_manager_list.append(TrainingManager(gpu.name.replace('physical_', '')))
 
     for case_name in case_names:
         print('Running case {}...'.format(case_name))
@@ -93,24 +93,24 @@ if __name__ == '__main__':
 
                 model_assigned_to_gpu = False
                 while not model_assigned_to_gpu:
-                    for subprocess_training_manager in subprocess_training_manager_list:
-                        if subprocess_training_manager.subprocess is None or not subprocess_training_manager.subprocess.is_alive():
-                            if subprocess_training_manager.subprocess is None:
+                    for training_manager in subprocess_training_manager_list:
+                        if training_manager.subprocess is None or not training_manager.subprocess.is_alive():
+                            if training_manager.subprocess is None:
                                 print('Running process on {} for the first time.'.format(
-                                    subprocess_training_manager.device_name))
+                                    training_manager.device_name))
                             else:
                                 print('Running process on {}, because subprocess alive={}'.format(
-                                    subprocess_training_manager.device_name,
-                                    subprocess_training_manager.subprocess.is_alive()))
-                            subprocess_training_manager.subprocess = Process(target=train_greyscale_model,
-                                                                             args=(
-                                                                                 subprocess_training_manager.device_name,
-                                                                                 configuration,
-                                                                                 case_name,
-                                                                                 model_factory,
-                                                                                 model_iteration,
-                                                                                 augmentations))
-                            subprocess_training_manager.subprocess.start()
+                                    training_manager.device_name,
+                                    training_manager.subprocess.is_alive()))
+                            training_manager.subprocess = Process(target=train_greyscale_model,
+                                                                  args=(
+                                                                      training_manager.device_name,
+                                                                      configuration,
+                                                                      case_name,
+                                                                      model_factory,
+                                                                      model_iteration,
+                                                                      augmentations))
+                            training_manager.subprocess.start()
                             model_assigned_to_gpu = True
                             break
                         time.sleep(1)

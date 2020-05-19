@@ -18,10 +18,11 @@ This installation has been tested on Windows 10 64 bit.
 Download Python 3.7 x64
 https://www.python.org/downloads/windows/
 
-## Tensorflow 2.2.0 GPU
-NVIDIA GPU drivers - 418.x or higher.
-CUDE Toolkit - CUDA 10.1
-cuDNN SDK = 7.6
+## Tensorflow 2.1.0 GPU
+Tensorflow 2.1.0 GPU has the following requirements.
+- NVIDIA GPU drivers - 418.x or higher.
+- CUDA Toolkit - CUDA 10.1
+- cuDNN SDK = 7.6
 
 For more information, refer to
 https://www.tensorflow.org/install/gpu
@@ -29,5 +30,5 @@ https://www.tensorflow.org/install/gpu
 ## Other requirements
 A virtual environment is recommended. After setting up your virtual environment, run
 ```shell script
-python3 -m pip install -r requirements
+python3 -m pip install -r requirements.txt
 ```

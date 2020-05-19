@@ -16,7 +16,7 @@ see <https://www.gnu.org/licenses/>.
 import pathlib
 import random
 import numpy
-from io import *
+from image_io import *
 
 
 def _get_sequential_batch(incremental_index,
