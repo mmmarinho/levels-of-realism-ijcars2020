@@ -12,3 +12,6 @@ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Gen
 You should have received a copy of the GNU General Public License along with this program. If not,
 see <https://www.gnu.org/licenses/>.
 """
+from augmentations.augmentation_affine import AugmentationAffine
+from augmentations.augmentation_brightness import AugmentationBrightness
+from augmentations.augmentation_pixelwise_random import AugmentationPixelWiseRandom
