@@ -12,3 +12,26 @@ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Gen
 You should have received a copy of the GNU General Public License along with this program. If not,
 see <https://www.gnu.org/licenses/>.
 """
+import PIL
+import numpy
+
+
+def numpy_array_to_pil_image(image, color_mode):
+    if color_mode == 'grey':
+        return one_channel_numpy_array_to_pil_image(image)
+    elif color_mode == 'color':
+        return three_channel_numpy_array_to_pil_image(image)
+    else:
+        raise ValueError('Unknown color_mode={}'.format(color_mode))
+
+
+def pil_image_to_numpy_array(pil_image):
+    return numpy.array(pil_image, dtype='float32') / 255
+
+
+def one_channel_numpy_array_to_pil_image(image):
+    return PIL.Image.fromarray((image * 255).astype('uint8'), 'L')
+
+
+def three_channel_numpy_array_to_pil_image(image):
+    return PIL.Image.fromarray((image * 255).astype('uint8'), 'RGB')

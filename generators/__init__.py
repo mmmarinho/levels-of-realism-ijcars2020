@@ -1,6 +1,6 @@
 """
 The Effects of Different Levels of Photorealism on the Training of CNNs with only Synthetic Images for the Semantic Segmentation of Robotic Instruments in a Head Phantom
-Copyright (C) 2019 Murilo Marques Marinho
+Copyright (C) 2020 Murilo Marques Marinho
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
 License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
@@ -15,43 +15,8 @@ see <https://www.gnu.org/licenses/>.
 
 import pathlib
 import random
-
-import PIL
 import numpy
-
-
-def _open_greyscale_8bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size):
-    """
-    Loads the image at image_path, checks if it is 8bit depth, resizes the image to image_size, converts
-    it to a numpy float32 array, and divides it by 255 to give each bit a value between 0 and 1.
-    :param image_path: the path to the image as a string (e.g. 'data/image.png')
-    :param image_size: a tuple with the desired image size (e.g. (256, 256))
-    :return: a float32 numpy array version of the image
-    :except: raises a ValueError if the image is not 8bit
-    """
-    pil_image = PIL.Image.open(image_path).resize(image_size)
-    if pil_image.mode != 'L':
-        raise ValueError(
-            'The input image at {} has incorrect mode={}. Check if it is a 8bit greyscale image'.format(image_path,
-                                                                                                        pil_image.mode))
-    return numpy.array(pil_image, dtype='float32') / 255.
-
-
-def _open_color_24bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size):
-    """
-    Loads the image at image_path, checks if it is 24bit depth, resizes the image to image_size, converts
-    it to a numpy float32 array, and divides it by 255 to give each bit a value between 0 and 1.
-    :param image_path: the path to the image as a string (e.g. 'data/image.png')
-    :param image_size: a tuple with the desired image size (e.g. (256, 256, 3))
-    :return: a float32 numpy array version of the image
-    :except: raises a ValueError if the image is not 24bit
-    """
-    pil_image = PIL.Image.open(image_path).resize(image_size)
-    if pil_image.mode != 'RGB':
-        raise ValueError(
-            'The input image at {} has incorrect mode={}. Check if it is a 8bit greyscale image'.format(image_path,
-                                                                                                        pil_image.mode))
-    return numpy.array(pil_image, dtype='float32') / 255.
+from io import *
 
 
 def _get_sequential_batch(incremental_index,
@@ -99,10 +64,10 @@ def _get_sequential_batch(incremental_index,
 
         # Load, resize, and cast images to float
         if color_mode == 'grey':
-            image = _open_greyscale_8bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size)
+            image = open_greyscale_8bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size)
         else:
-            image = _open_color_24bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size)
-        label = _open_greyscale_8bit_image_resize_and_convert_to_numpy_float_array(label_path, image_size)
+            image = open_color_24bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size)
+        label = open_greyscale_8bit_image_resize_and_convert_to_numpy_float_array(label_path, image_size)
 
         # Check image and label
         if image.shape[0:2] != label.shape[0:2]:

@@ -12,3 +12,23 @@ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Gen
 You should have received a copy of the GNU General Public License along with this program. If not,
 see <https://www.gnu.org/licenses/>.
 """
+import random
+import numpy
+import PIL
+from conversions import numpy_array_to_pil_image
+
+
+class AugmentationBrightness:
+    def __init__(self, min, max, color_mode):
+        if min < 0.0 or max > 2.0:
+            raise ValueError('Min should be > 0.0 and max < 2.0')
+        self.min = min
+        self.max = max
+        self.color_mode = color_mode
+
+    def augment(self, image, label):
+        pil_image = numpy_array_to_pil_image(image, self.color_mode)
+        enhancer = PIL.ImageEnhance.Brightness(pil_image)
+        pil_image = enhancer.enhance(random.uniform(self.min, self.max))
+        ret_image = numpy.array(pil_image, dtype='float32') / 255
+        return ret_image, label
