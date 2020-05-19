@@ -16,7 +16,7 @@ import os
 import pathlib
 import time
 import scipy.io as sio
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import tensorflow as tf
 
 from generators import image_generator, get_size_of_data

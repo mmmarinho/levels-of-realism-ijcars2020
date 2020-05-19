@@ -24,7 +24,7 @@ from augmentations import *
 configuration = {
     'ITERATION_START': 0,  # Initial iteration number
     'ITERATION_COUNT': 20,  # Number of iterations of each model
-    'EPOCHS': 40,  # Number of epochs, in practice the number of checkpoints
+    'EPOCHS': 50,  # Number of epochs, in practice the number of checkpoints
     'STEPS_PER_EPOCH': 1000,  # Number of training steps before each checkpoint
     'EPOCHS_TO_REDUCE_LR': 15,  # Number of epochs after which the LR will be divided by 'LR DIVISOR'
     'LR_DIVISOR': 2.,  # The number the learning rate will be divided by after 'EPOCHS_TO_REDUCE_LR'
@@ -42,9 +42,9 @@ configuration = {
 
 # Simulation dataset names
 case_names = [
-    '1_membrane_flat_circle',
-    '2_membrane_basic_circle',
-    '3_membrane_realistic_circle',
+    '1_flat_renderer',
+    '2_basic_renderer',
+    '3_realistic_renderer',
 ]
 
 

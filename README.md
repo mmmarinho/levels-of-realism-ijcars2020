@@ -1,5 +1,12 @@
 # The Effects of Different Levels of Realism (IJCARS2020)
 
+# License
+This code is GPLv3 licensed. Please read and understand the terms of the license before using (or reading) the code available in this repository.
+ 
+A couple of useful links on this topic.
+- https://www.gnu.org/licenses/gpl-3.0.en.html
+- https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)
+
 # Citation
 This code refers to the following publication. 
 ```bibtex
@@ -18,7 +25,7 @@ This installation has been tested on Windows 10 64 bit.
 This code was tested on a NVIDIA RTX 2070. The code will automatically assign one model for each available GPU.
 
 ## Python 3.7 
-Download Python 3.7 x64
+Download and install Python 3.7 x64
 https://www.python.org/downloads/windows/
 
 ## Tensorflow 2.1.0 GPU
