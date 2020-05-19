@@ -36,11 +36,6 @@ def _three_channel_numpy_array_to_pil_image(image):
     return PIL.Image.fromarray((image * 255).astype('uint8'), 'RGB')
 
 
-#class GSAugmentationImageNormalizer:
-#    def augment(self, image, label):
-#        normalized_image = numpy.divide(numpy.subtract(image, numpy.average(image)), numpy.std(image))
-#        return normalized_image, label
-
 class AugmentationSharpness:
     def __init__(self, min, max, color_mode):
         if min < 0.0 or max > 2.:

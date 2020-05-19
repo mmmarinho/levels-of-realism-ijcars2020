@@ -16,9 +16,9 @@ see <https://www.gnu.org/licenses/>.
 import time
 import tensorflow as tf
 from multiprocessing import Process
-from unet.training import train_greyscale_model
-from unet.model_unet import UNETModelFactory
-from unet.augmentations import *
+from training import train_greyscale_model
+from model_factories import UnetModelFactory
+from augmentations import *
 
 # All the configurable parameters for the overall training
 configuration = {
@@ -30,32 +30,27 @@ configuration = {
     'LR_DIVISOR': 2.,  # The number the learning rate will be divided by after 'EPOCHS_TO_REDUCE_LR'
     'VALIDATION_STEPS': 1,  # Validate through the data only once
     'TRAIN_MODEL': True,  # Train the model or load an existing file
-    'DEBUG_OUTPUT_IMAGES': False,  # Show output images while the network is being trained
     'PRINT_OUTPUT_IMAGES': True,  # Print the output images while the network is being trained
     'FIT_VERBOSITY': 2,  # Verbosity of the Keras fit_generator function
     'BATCH_GENERATION_MODE': 'sequential',  # The batch generation mode
     'TRAINING_PATH': 'data/',  # The root path where your 'case_names' are. E.g. 'data/'
     'RESULTS_PATH': 'data/',  # Where to save the training results. E.g. 'data/'
-    'VALIDATION_PATH': 'database/merge/',  # Where your validation images are stored. E.g. 'database/05/cropped/'
+    'VALIDATION_PATH': 'validation_data/',  # Where your validation images are stored. E.g. 'validation_data/'
     'IMAGE_SIZE': (256, 256),  # Only height and width, (e.g. (256, 256) ) Channels are defied by 'GREY_OR_COLOR'
     'GREY_OR_COLOR': 'grey'  # Either 'grey' (8bit 1 channel) or 'color' (8bit 3 channel). Raises Exception if wrong
 }
 
 # Simulation dataset names
 case_names = [
-    #'1_membrane_flat_circle',
-    #'2_membrane_basic_circle',
-    #'3_membrane_realistic_circle',
-    #'4_membrane_realistic_circle_withCameraVariation',
-    #"5_membrane_photo_background_circle",
-    "6_membrane_photo_background_tool_circle",
-    "7_membrane_photo_tool_circle"
+    '1_membrane_flat_circle',
+    '2_membrane_basic_circle',
+    '3_membrane_realistic_circle',
 ]
 
 
 # Models to be trained
 model_factories = [
-    UNETModelFactory(name='unet', batch_size=8, optimizer=tf.keras.optimizers.SGD(lr=0.02)),
+    UnetModelFactory(batch_size=8, optimizer=tf.keras.optimizers.SGD(lr=0.02)),
 ]
 
 # Augmentations will be applied to the input data in the same order as they are in the list

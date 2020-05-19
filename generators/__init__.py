@@ -13,11 +13,11 @@ You should have received a copy of the GNU General Public License along with thi
 see <https://www.gnu.org/licenses/>.
 """
 
-
 import pathlib
+import random
+
 import PIL
 import numpy
-import random
 
 
 def _open_greyscale_8bit_image_resize_and_convert_to_numpy_float_array(image_path, image_size):
@@ -199,7 +199,8 @@ def image_generator(path,
         ))
     sample_size = len(training_images_paths)
     if sample_size < 1:
-        raise RuntimeError('No images were found in {} and/or {}'.format(str(training_images_dir), str(training_labels_dir)))
+        raise RuntimeError(
+            'No images were found in {} and/or {}'.format(str(training_images_dir), str(training_labels_dir)))
 
     print('Found {} images and {} labels.'.format(len(training_images_paths), len(training_labels_paths)))
     print('The batch generation mode is {}.'.format(str(batch_generation_mode)))

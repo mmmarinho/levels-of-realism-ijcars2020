@@ -16,11 +16,11 @@ see <https://www.gnu.org/licenses/>.
 import os
 import pathlib
 import time
-import matplotlib.pyplot as plt
 import scipy.io as sio
+import matplotlib as plt
 import tensorflow as tf
 
-from unet.generators import image_generator, get_size_of_data
+from generators import image_generator, get_size_of_data
 
 
 def train_greyscale_model(device, configuration, case_name, model_factory, model_iteration, augmentations):
@@ -74,9 +74,6 @@ def train_greyscale_model(device, configuration, case_name, model_factory, model
                                  batch_generation_mode='sequential',
                                  color_mode=configuration['GREY_OR_COLOR'])
             vg_size = get_size_of_data(validation_path)
-
-            if configuration['DEBUG_OUTPUT_IMAGES']:
-                fig = plt.figure()
 
             # Manually spin through the EPOCHS
             for i in range(0, configuration['EPOCHS']):
@@ -132,43 +129,6 @@ def train_greyscale_model(device, configuration, case_name, model_factory, model
                     output = model.predict(image[0].reshape(image_size_with_channel_and_batch))
                     # Get the prediction of a validation image (real)
                     val_output = model.predict(val_image[0].reshape(image_size_with_channel_and_batch))
-
-                    # Show output images on screen
-                    if configuration['DEBUG_OUTPUT_IMAGES']:
-                        def common_plot_calls(image, title):
-                            if configuration['GREY_OR_COLOR'] == 'grey':
-                                plt.imshow(image.reshape(image_size), cmap=plt.cm.gray)
-                            else:
-                                raise RuntimeError('Color not implemented yet.')
-                            plt.title(title)
-                            plt.xticks([])
-                            plt.yticks([])
-                            plt.grid(False)
-
-                        # Threshold
-                        output[output > 0.5] = 1
-                        output[output <= 0.5] = 0
-                        val_output[val_output > 0.5] = 1
-                        val_output[val_output <= 0.5] = 0
-                        # Show image
-                        plt.subplot(4, 3, 1)
-                        common_plot_calls(image[0], 'Input (S)')
-                        plt.subplot(4, 3, 2)
-                        common_plot_calls(label[0], 'Label (S)')
-                        plt.subplot(4, 3, 3)
-                        common_plot_calls(output, 'Predicion (S)')
-                        plt.subplot(4, 3, 4)
-                        common_plot_calls(val_image[0], 'Input (R)')
-                        plt.subplot(4, 3, 5)
-                        common_plot_calls(val_label[0], 'Label (R)')
-                        plt.subplot(4, 3, 6)
-                        common_plot_calls(val_output, 'Predicion (R)')
-                        plt.subplot(4, 3, 7)
-                        plt.plot(full_history['loss'])
-                        plt.subplot(4, 3, 8)
-                        plt.plot(full_history['binary_accuracy'])
-                        plt.draw()
-                        plt.pause(0.001)
 
                     # Save output images to disk
                     if configuration['PRINT_OUTPUT_IMAGES']:
