@@ -45,7 +45,7 @@ python3 -m pip install -r requirements.txt
 
 ## Download synthetic image database
 The data is available at IEEE DataPort
-http://dx.doi.org/10.21227/xmc2-1v59
+<iframe width="100%" height="600" src="https://ieee-dataport.org/open-access/synthetic-images-semantic-segmentation-robotic-instruments-head-phantom/embed" frameborder="0" class="embed-textarea" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
 
 Download and extract `data.zip` and `validation_data.zip`
 
