@@ -23,6 +23,11 @@ from generators import image_generator, get_size_of_data
 
 
 def train_greyscale_model(device, configuration, case_name, model_factory, model_iteration, augmentations):
+    # The next three lines of code are a 2020/06/30 fix because tensorflow was not working anymore.
+    # "Failed to get convolution algorithm".
+    config = tf.compat.v1.ConfigProto()
+    config.gpu_options.allow_growth = True
+    session = tf.compat.v1.InteractiveSession(config=config)
     with tf.device(device):
 
         # Some helpful variables

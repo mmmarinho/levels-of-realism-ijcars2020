@@ -22,20 +22,22 @@ Cite the following publication.
 This installation has been tested on Windows 10 64 bit.
 
 ## Hardware requirements
-This code was tested on a NVIDIA RTX 2070. The code will automatically assign one model for each available GPU.
+This code was tested on a rig with three NVIDIA RTX 2070. The code will automatically assign one model for each available GPU.
 
 ## Python 3.7 
-Download and install Python 3.7 x64
+Download and install Python 3.7 x64 (Tested on Python 3.7.8)
 https://www.python.org/downloads/windows/
 
-## Tensorflow 2.1.0 GPU
-Tensorflow 2.1.0 GPU has the following requirements.
-- NVIDIA GPU drivers - 418.x or higher.
-- CUDA Toolkit - CUDA 10.1
-- cuDNN SDK = 7.6
+## Tensorflow 2
+Tensorflow 2 has the following requirements.
+- NVIDIA GPU drivers - 418.x or higher. (Tested on 451.48)
+- CUDA Toolkit - CUDA 10.1 (Tested on 10.1 update 2)
+- cuDNN SDK - 7.6 (Tested on 7.6.5.32)
 
 For more information, refer to
 https://www.tensorflow.org/install/gpu
+
+Tensorflow's API and backward compatibility is unreliable. I do not plan on keeping this code up-to-date anymore and will migrate to another deep-learning framework. 
 
 ## Other requirements
 A virtual environment is recommended. After setting up your virtual environment, run
